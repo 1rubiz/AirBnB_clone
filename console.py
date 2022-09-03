@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ Program that contains the entry point of the command interpreter """
-
 import cmd
 from models.base_model import BaseModel
 from models.user import User
@@ -9,14 +8,18 @@ from models.amenity import Amenity
 from models.city import City
 from models.review import Review
 from models.place import Place
+from models import storage
 import sys
 
-class HBNBCommand(cmd.Cmd):
 
-    def __init__(self):
-        cmd.Cmd.__init__(self)
-        self.prompt = '(hbnb) '
+class HBNBCommand(cmd.Cmd):
+    """ initializes the command prompt """
+    prompt = "(hbnb) "
+    level = ["BaseModel", "City", "State",
+             "User", "Place", "Review", "Amenity"]
+
     def do_EOF(self, args):
+        """ctrl-d to exit\n"""
 	print()
 	return True
 
@@ -149,7 +152,6 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, arg):
 	"""Quit command to exit the program\n"""
 	return True
-        sys.exit(1)
 
     def help_quit(self):
         print("syntax: quit")
@@ -157,3 +159,5 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
 	HBNBCommand().cmdloop()
+
+
