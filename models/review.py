@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-"""Review class for AirBnB"""
+""" review of user's when left the place """
 from . base_model import BaseModel
 
+
 class Review(BaseModel):
-    """Review class that inherits from basemodel"""
-    place_id = ""
-    user_id = ""
-    text = ""
+    """ review of the user (qualification)"""
+    place_id = ''
+    user_id = ''
+    text = ''

@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-"""Amenity class for AIRBnB"""
+""" The amenities of place """
 from . base_model import BaseModel
 
+
 class Amenity(BaseModel):
-    """Amenity class that inherits from the basemodel"""
-    name = ""
+    """ Amenity (Comodidades) """
+    name = ''

@@ -15,11 +15,11 @@ class test_Amenity(unittest.TestCase):
     @classmethod
     def setup(self):
         self.place1 = Place()
-        self.palce1.city_id = "Zanarkand"
-        self.place1.state_id = "Spira"
-        self.place1.user_id = "Tidus"
-        self.place1.name = "Shuyin"
-        self.place1.descrip_id = "Lost city"
+        self.palce1.city_id = "Unknown"
+        self.place1.state_id = "Unknown"
+        self.place1.user_id = "Unknown"
+        self.place1.name = "Deserts"
+        self.place1.descrip_id = "Apocalypes city"
         self.place.street_id = 0
         self.place.amenity_id = []
 

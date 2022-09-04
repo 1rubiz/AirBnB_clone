@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-"""First state class for AIRBnB"""
+""" State where user's come from """
 from . base_model import BaseModel
 
+
 class State(BaseModel):
-    """state class that inherits from the basemodel"""
-    name = ""
+    """ Define the state of the user """
+    name = ''

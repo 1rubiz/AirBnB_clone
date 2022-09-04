@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/pyton3
 
 """Unittest BaseModel class"""
 
@@ -13,8 +13,8 @@ class TEST_base(unittest.TestCase):
     @classmethod
     def setup(self):
         self.base1 = BaseModel()
-        self.name = "Helena"
-        self.base1.my_number = 35
+        self.name = "RUBY"
+        self.base1.my_number = 19
 
     @classmethod
     def tearDown(self):
@@ -34,8 +34,8 @@ class TEST_base(unittest.TestCase):
 
     def test_to_dict(self):
         base = BaseModel()
-        base.name = "Kobe"
-        base.age = 40
+        base.name = "Danielle"
+        base.age = 18
         convert = base.to_dict()
         self.assertEqual(convert["id"], base.id)
         self.assertEqual(convert["name"], base.name)

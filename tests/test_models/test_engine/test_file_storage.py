@@ -22,9 +22,9 @@ class test_filestore(unittest.TestCase):
     @classmethod
     def setup(self):
         self.review1 = Review()
-        self.review1.user_id = "Rubt"
+        self.review1.user_id = "Ruby"
         self.review1.place_id = "Nigeria"
-        self.review1.text = "WE'll be back soon"
+        self.review1.text = "I'll be back"
 
     @classmethod
     def tearDown(self):
@@ -37,14 +37,21 @@ class test_filestore(unittest.TestCase):
     def test_new(self):
         file1 = FileStorage()
         inst_dic = file1.all()
-        ruby = User()
-        ruby.id = 999999
-        ruby.name = "Tidus"
-        file1.new(ruby)
-        key = ruby.__class__.__name__ + "." + str(ruby.id)
+        tidus = User()
+        tidus.id = 999999
+        tidus.name = "Ruby"
+        file1.new(tidus)
+        key = tidu.__class__.__name__ + "." + str(tidus.id)
         self.assertIsNotNone(inst_dic[key])
 
-     def test_reload(self):
+    def test_all(self):
+        file2 = FileStorage()
+        instances_dic = file2.all()
+        self.assertIsNotNone(inst_dic)
+        self.assertEqual(type(inst_dic), dict)
+        self.assertIs(inst_dic, file2._FileStorage__objects)
+
+    def test_reload(self):
         file3 = FileStorage()
         try:
             os.remove("file.json")
@@ -54,13 +61,6 @@ class test_filestore(unittest.TestCase):
             for n in r:
                 self.assertEqual(n, "{}")
         self.assertIs(file3.reload(), None)
-
-    def test_all(self):
-        file2 = FileStorage()
-        instances_dic = file2.all()
-        self.assertIsNotNone(inst_dic)
-        self.assertEqual(type(inst_dic), dict)
-        self.assertIs(inst_dic, file2._FileStorage__objects)
 
 if __name__ = "__main__":
     unittest.main()

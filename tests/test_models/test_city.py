@@ -16,7 +16,7 @@ class test_Amenity(unittest.TestCase):
     def setup(self):
         self.city1 = City()
         self.city1.name = "Benin"
-        self.city1.state_id = "zened"
+        self.city1.state_id = "Zoned"
 
     @classmethod
     def tearDown(self):

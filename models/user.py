@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-"""User class for AirBnB"""
+""" First User in ABNB project """
 from . base_model import BaseModel
 
+
 class User(BaseModel):
-    """user class that inherits from basemodel"""
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
+    """ class User that inherits from BaseModel """
+    email = ''
+    password = ''
+    first_name = ''
+    last_name = ''

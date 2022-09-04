@@ -14,9 +14,9 @@ class test_user(unittest.TestCase):
     @classmethod
     def setup(self):
         self.my_user = User()
-        self.my_user.first_name = "Rubiz"
-        self.my_user.last_name = "Creator"
-        self.my_user.email = "mynewemail@gmail.new"
+        self.my_user.first_name = "Ruby"
+        self.my_user.last_name = "Izekor"
+        self.my_user.email = "qweryu@ghjk.com"
         self.my_user.password = "qwertyuiop"
 
     @classmethod

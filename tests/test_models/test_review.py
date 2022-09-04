@@ -15,9 +15,9 @@ class test_Amenity(unittest.TestCase):
         @classmethod
         def setup(self):
             self.review1 = Review()
-            self.review1.user_id = "Tidus"
-            self.review1.place_id = "Zanarkand"
-            self.review1.text = "See you a next time"
+            self.review1.user_id = "Divine"
+            self.review1.place_id = "Ugbowo"
+            self.review1.text = "I'll be back"
 
         @classmethod
         def tearDown(self):

@@ -14,7 +14,7 @@ class test_Amenity(unittest.TestCase):
         @classmethod
         def setup(self):
             self.amenity1 = Amenity()
-            self.amenity1.name = "Yggdrasil"
+            self.amenity1.name = "demigorgon"
 
         @classmethod
         def tearDown(self):

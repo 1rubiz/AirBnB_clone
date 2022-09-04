@@ -1,8 +1,9 @@
-#!/usr/bin/python3
-""" city class for AIRBnb """
-form . base_model import BaseModel
+#!/user/bin/python3
+""" City where user's come from """
+from . base_model import BaseModel
+
 
 class City(BaseModel):
-    """city class that inherits from basemodel"""
-    state_id = ""
-    name = ""
+    """ city of the user """
+    state_id = ''
+    name = ''
