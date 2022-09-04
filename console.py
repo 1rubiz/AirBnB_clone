@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
 	elif (val[0] not in self.level):
 		print("** class doesn't exist **")
 		return None
-	elif len(val) == 1
+	elif len(val) == 1:
 		print("** instance id missing **")
 		return None
 	else:
