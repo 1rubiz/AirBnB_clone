@@ -11,125 +11,143 @@ from models.place import Place
 from models import storage
 import sys
 
-
 class HBNBCommand(cmd.Cmd):
-    """ initializes the command prompt """
+    """ init Command Prompt """
     prompt = "(hbnb) "
     level = ["BaseModel", "City", "State",
              "User", "Place", "Review", "Amenity"]
 
     def do_EOF(self, args):
-        """ctrl-d to exit\n"""
-	print()
-	return True
+        """CTRl-D to exit\n"""
+        print()
+        return True
 
-    def do_create(self, arg):
-	 """Create a new instance of BaseModel"""
-	if not arg:
-		print("** class name missing **")
-		return None
-	elif (arg not in self.level):
-		print("** class doesn't exits **")
-		return None
-	else:
-		inst = eval(line + "()")
-		inst.save()
-		print(inst.id)
-    def do_show(self, arg):
-	"""Prints the string representation of an
-	instance based on the class name and id"""
-	val = arg.split()
-	if not arg:
-		print("** class name missing **")
-		return None
-	elif (val[0] not in self.level):
-		print("** class doesn't exist **")
-		return None
-	elif len(val) == 1
-		print("** instance id missing **")
-		return None
-	else:
-		key = "{}.{}".format(val[0], val[1])
-		if key not is storage.all().keys():
-			print("** no instance found **")
-		else:
-			obj = storage.all()
-			print(obj[key])
+    def do_quit(self, args):
+        """Quit command to exit the program\n"""
+	sys.quit(1)
+        return True
 
-    def do_destroy(self, arg):
-	"""Deletes an instance based on the class name and id"""
-        val = arg.split()
-        if not arg:
+    def help_quit(self):
+        print("syntax: quit")
+        print("-- terminates the application")
+
+    def emptyline(self):
+        """ENTER shouldn’t execute anything"""
+        pass
+
+    def do_create(self, line):
+        """Create a new instance of BaseModel"""
+        if not line:
             print("** class name missing **")
             return None
-        elif (val[0] not in self.level):
+        elif (line not in self.level):
             print("** class doesn't exist **")
             return None
-        elif len(val) == 1:
+        else:
+            my_inst = eval(line + "()")
+            my_inst.save()
+            print(my_inst.id)
+
+    def do_show(self, line):
+        """Prints the string representation of
+        an instance based on the class name and id"""
+        # First, separate in a list the commands by white space
+        n = line.split()
+        if not line:
+            print("** class name missing **")
+            return None
+        elif (n[0] not in self.level):
+            print("** class doesn't exist **")
+            return None
+        elif len(n) == 1:
+            print("** instance id missing **")
+            return None
+        else:
+            # concatenate class_name and id with a dot
+            key = "{}.{}".format(n[0], n[1])
+            # search in file json the key saved in key
+            if key not in storage.all().keys():
+                print("** no instance found **")
+            else:
+                obj = storage.all()
+                # string representation of the instance with class name and id
+                print(obj[key])
+
+    def do_destroy(self, line):
+        """Deletes an instance based on the class name and id"""
+        n = line.split()
+        if not line:
+            print("** class name missing **")
+            return None
+        elif (n[0] not in self.level):
+            print("** class doesn't exist **")
+            return None
+        elif len(n) == 1:
             print("** instance id missing **")
         else:
-            key = "{}.{}".format(val[0], val[1])
+            key = "{}.{}".format(n[0], n[1])
             if key not in storage.all().keys():
                 print("** no instance found **")
             else:
                 del storage.all()[key]
                 storage.save()
-    def do_all(self, arg):
-	 """Prints all string representation of
+
+    def do_all(self, line):
+        """Prints all string representation of
         all instances based or not on the class name"""
-        val = arg.split()
+        n = line.split()
         obj_list = []
-        if len(val) == 0:
+        if len(n) == 0:
             for value in storage.all().values():
                 obj_list.append(value.__str__())
             print(obj_list)
-        elif (val[0] not in self.level):
+        elif (n[0] not in self.level):
             print("** class doesn't exist **")
         else:
             for key, value in storage.all().items():
-                if val[0] in key:
+                if n[0] in key:
                     obj_list.append(storage.all()[key].__str__())
                 else:
                     return
             print(obj_list)
 
-    def do_update(self, arg):
-	 """Updates an instance based on the class name and id
+    def do_update(self, line):
+        """Updates an instance based on the class name and id
         by adding or updating attribute (save the change into the JSON file)
         Usage: update <class name> <id> <attribute name> "<attribute value>"""
-        val = arg.split()
-        if len(val) == 0:
+        n = line.split()
+        if len(n) == 0:
             print("** class name missing **")
-        elif (val[0] not in self.level):
+        elif (n[0] not in self.level):
             print("** class doesn't exist **")
-        elif len(val) == 1:
+        elif len(n) == 1:
             print("** instance id missing **")
         else:
             obj = storage.all()
-            key = "{}.{}".format(val[0], val[1])
+            key = "{}.{}".format(n[0], n[1])
             if (key not in obj):
                 print("** no instance found **")
-            elif len(val) == 2:
+            elif len(n) == 2:
                 print("** attribute name missing **")
-            elif len(val) == 3:
+            elif len(n) == 3:
                 print("** value missing **")
             else:
                 # cast to the attribute type
                 # arg_type = type(eval(n[3]))
                 # attr = n[3].strip('\'\"')
-                setattr(obj[key], val[2], val[3])
+                setattr(obj[key], n[2], n[3])
                 storage.save()
 
-    def do_count(self, arg):
-	 """ retrieve the number of instances of a class """
+    def do_count(self, line):
+        """ retrieve the number of instances of a class """
         count = 0
         for key in storage.all().keys():
-            if arg in key:
+            if line in key:
                 count += 1
         print(count)
 
-    def default(self, arg):
-	 """ Retrieve instances based on methods, i.e. <class name>.all() """
+    def default(self, line):
+        """ Retrieve instances based on methods, i.e. <class name>.all() """
         n = line.split('.')
         inst = n[0]
         if n[1] == "all()":
@@ -149,15 +167,13 @@ class HBNBCommand(cmd.Cmd):
             sp = n[1].split('"')
             line = inst + ' ' + sp[1] + ' ' + sp[3] + ' ' + sp[5]
             self.do_update(line)
-    def do_quit(self, arg):
-	"""Quit command to exit the program\n"""
-	return True
-
-    def help_quit(self):
-        print("syntax: quit")
-        print("-- terminates the application")
 
 if __name__ == '__main__':
-	HBNBCommand().cmdloop()
-
-
+    HBNBCommand().cmdloop()
+    # import sys
+    # non-interactive mode
+    # if len(sys.argv) > 1:
+    # Since onecmd () takes a single string as input
+    # the arguments of the program must be joined before passing them
+    # HBNBCommand().onecmd(' '.join(sys.argv[1:]))
+    # HBNBCommand().cmdloop()
